@@ -47,7 +47,7 @@ public class UserController {
     }
 
     /**
-     * get a USER by ID in GET request, end point is http://hostname:port/simplecrud/v1/user/id
+     * Get a USER by ID in GET request, end point is http://hostname:port/simplecrud/v1/user/id
      * @param userId
      * @return
      */
@@ -63,6 +63,11 @@ public class UserController {
         return new ResponseEntity<Object>(user, HttpStatus.OK);
     }
 
+    /**
+     * Delete a user based on user ID.
+     * @param userId
+     * @return
+     */
     @DeleteMapping(value = "/user/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long userId) {
         userService.deleteUser(userId);
@@ -71,4 +76,16 @@ public class UserController {
         return new ResponseEntity<Object>(messageResponse, HttpStatus.OK);
     }
 
+    /**
+     * Update a user based on PUT request.
+     * @param userId
+     * @param user
+     * @return
+     */
+    @PutMapping(value = "/user/{id}")
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long userId, @RequestBody User user) {
+        user.setId(userId);
+        User updatedUser = userService.updateUser(user);
+        return new ResponseEntity<Object>(updatedUser, HttpStatus.OK);
+    }
 }

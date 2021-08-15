@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService{
      * @param user
      * @return
      */
-
     @Override
     public User saveUser(User user) {
         return userRepository.save(user);
@@ -38,7 +37,6 @@ public class UserServiceImpl implements UserService{
      * @param userId
      * @return
      */
-
     @Override
     public User findUserById(Long userId) {
         Optional<User> userOptional = userRepository.findById(userId);
@@ -52,7 +50,6 @@ public class UserServiceImpl implements UserService{
      * find all users in system.
      * @return
      */
-
     @Override
     public List<User> findAllUsers() {
         return userRepository.findAll();
@@ -63,7 +60,6 @@ public class UserServiceImpl implements UserService{
      * @param user
      * @return
      */
-
     @Override
     public User updateUser(User user) {
         return userRepository.save(user);
@@ -73,10 +69,8 @@ public class UserServiceImpl implements UserService{
      * Delete a user based on User ID.
      * @param userId
      */
-
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
-
     }
 }
