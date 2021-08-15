@@ -1,6 +1,7 @@
 package com.crudsimple.controller;
 
 import com.crudsimple.entity.User;
+import com.crudsimple.model.MessageResponse;
 import com.crudsimple.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,6 +44,31 @@ public class UserController {
     public ResponseEntity<?> getAllUsers() {
         List<User> userList = userService.findAllUsers();
         return new ResponseEntity<Object>(userList, HttpStatus.OK);
+    }
+
+    /**
+     * get a USER by ID in GET request, end point is http://hostname:port/simplecrud/v1/user/id
+     * @param userId
+     * @return
+     */
+
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable("id") Long userId) {
+        User user = userService.findUserById(userId);
+        if (user == null) {
+            MessageResponse messageResponse = new MessageResponse();
+            messageResponse.setMessage("User not found.");
+            return new ResponseEntity<Object>(messageResponse, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Object>(user, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/user/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Long userId) {
+        userService.deleteUser(userId);
+        MessageResponse messageResponse = new MessageResponse();
+        messageResponse.setMessage("User has been deleted successfully.");
+        return new ResponseEntity<Object>(messageResponse, HttpStatus.OK);
     }
 
 }
