@@ -17,7 +17,6 @@ import java.util.List;
  * @version 1.0
  * @since 2021-08-16
  */
-
 @RestController
 @RequestMapping("/simplecrud/v1")
 public class UserController {
@@ -40,11 +39,10 @@ public class UserController {
      * Get all list of users based on GET request.
      * @return
      */
-
     @GetMapping(value = "/user")
     public ResponseEntity<?> getAllUsers() {
         List<User> userList = userService.findAllUsers();
         return new ResponseEntity<Object>(userList, HttpStatus.OK);
     }
-    
+
 }
